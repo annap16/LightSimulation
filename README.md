@@ -1,4 +1,4 @@
-# Wypełnianie Siatki Trójkątów - Powierzchnia Beziera 3-go Stopnia
+# Modelowanie oświetlenia - Powierzchnia Beziera 3-go Stopnia
 
 Repozytorium zawiera projekt, którego celem jest modelowanie oświetlenia i nakładanie tekstur na powierzchni 3D opartej na powierzchni Beziera 3-go stopnia. 
 Projekt wczytuje dane z pliku tekstowego przy starcie aplikacji i pozwala na interakcję z powierzchnią w celu obserwacji wpływu różnych parametrów oświetlenia oraz wyświetlania tekstur na tych powierzchniach.
@@ -25,7 +25,7 @@ Powierzchnia Beziera 3-go stopnia jest wczytywana z pliku tekstowego zawierając
 - **Obliczanie koloru** – Kolor obiektu jest obliczany za pomocą wzoru oświetlenia Lamberta i uwzględnia refleksję w zależności od kąta między wektorem normalnym a źródłem światła.
 
 ### Oświetlenie
-- **Model Lamberta**:
+- W aplikacji zastosowano **Model Lamberta** zgodnie z poniższym wzorem:
   - Wzór na oświetlenie:  
     `I = kd * IL * IO * cos(∠(N, L)) + ks * IL * IO * cos^m(∠(V, R))`
     Gdzie:
@@ -36,4 +36,43 @@ Powierzchnia Beziera 3-go stopnia jest wczytywana z pliku tekstowego zawierając
     - `V` to wersor widza (zwykle [0, 0, 1]).
     - `R` to wektor odbicia światła.
     - `m` to współczynnik opisujący jak bardzo trójkąt jest zwierciadlany.
+
+# Lighting Modeling - Degree 3 Bézier Surface
+
+This repository contains a project aimed at modeling lighting and applying textures to a 3D surface based on a degree 3 Bézier surface. The project loads data from a text file at the start of the application and allows interaction with the surface to observe the effects of different lighting parameters and display textures on the surfaces.
+
+## Project Description
+
+### Input
+The degree 3 Bézier surface is loaded from a text file containing 16 control points (each with 3 real numbers: x, y, z for each point).
+
+### Features
+- **Surface Triangulation** – Generation of a triangle mesh based on the Bézier surface.
+- **Surface Rotation** – The surface is rotated around the Z and X axes, and the user can modify the rotation angles using sliders (angles α from -45° to 45° and β from 0° to 90°).
+- **Triangle Filling** – Option to draw only the triangle mesh or fill the triangles with appropriate colors based on the lighting model.
+- **Triangulation Accuracy** – A slider to control the accuracy of the surface triangulation.
+- **Color Interpolation** – Calculating the fill color in triangles using Lambert's lighting model (diffuse and specular components).
+- **Light Movement** – Animation of the light source moving in a circular path on the plane (with an option to stop the animation).
+- **Spotlights** – Ability to toggle spotlights on/off in 3 primary colors (red, green, blue) and adjust their parameter mL using a slider (the last slider).
+- **Texture** – Ability to select a texture for the object, which will be applied to the Bézier surface.
+- **NormalMap** – Ability to load a normal map (NormalMap) and modify the normal vector based on this map.
+
+### Algorithms
+- **Rotation** – Rotation of the surface around the Z and X axes using appropriate rotation matrices.
+- **Barycentric Interpolation** – The color of the fill in a triangle is calculated based on barycentric coordinates.
+- **Color Calculation** – The object's color is computed using Lambert's lighting formula, considering the reflection based on the angle between the normal vector and the light source.
+
+### Lighting
+The **Lambertian model** is applied in the application using the following formula:
+- Lighting formula:  
+  `I = kd * IL * IO * cos(∠(N, L)) + ks * IL * IO * cos^m(∠(V, R))`
+  Where:
+  - `kd` and `ks` are the coefficients for the diffuse and specular components.
+  - `IL` and `IO` are the light and object colors.
+  - `N` is the normal vector.
+  - `L` is the light direction vector.
+  - `V` is the viewer direction vector (usually [0, 0, 1]).
+  - `R` is the light reflection vector.
+  - `m` is the coefficient describing how specular the triangle is.
+
 
